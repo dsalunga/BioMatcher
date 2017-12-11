@@ -1,2 +1,2 @@
 # BioMatcher
-Fingerprint matching library and benchmarking written in .NET
+Multithreaded fingerprint matching library, benchmarking, and distributed client/server solution using SignalR.
