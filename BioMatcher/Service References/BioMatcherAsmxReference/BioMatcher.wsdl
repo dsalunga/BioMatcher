@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://tempuri.org/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://tempuri.org/">
+      <s:element name="Initialize">
+        <s:complexType />
+      </s:element>
+      <s:element name="InitializeResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="Identify">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="request" type="tns:MatchRequest" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="MatchRequest">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="Fingerprint" type="s:base64Binary" />
+          <s:element minOccurs="1" maxOccurs="1" name="LocaleId" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="ExtraRefCode" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="RequestDate" type="s:dateTime" />
+          <s:element minOccurs="1" maxOccurs="1" name="SkipLocale" type="s:boolean" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="IdentifyResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="IdentifyResult" type="tns:MatchResult" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="MatchResult">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="Found" type="s:boolean" />
+          <s:element minOccurs="1" maxOccurs="1" name="Score" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="MemberId" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="Extra" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="ExtraRefCode" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="RequestDate" type="s:dateTime" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="UpdateCache">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="localeId" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="fullUpdate" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UpdateCacheResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="GetCacheStatus">
+        <s:complexType />
+      </s:element>
+      <s:element name="GetCacheStatusResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetCacheStatusResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="InitializeSoapIn">
+    <wsdl:part name="parameters" element="tns:Initialize" />
+  </wsdl:message>
+  <wsdl:message name="InitializeSoapOut">
+    <wsdl:part name="parameters" element="tns:InitializeResponse" />
+  </wsdl:message>
+  <wsdl:message name="IdentifySoapIn">
+    <wsdl:part name="parameters" element="tns:Identify" />
+  </wsdl:message>
+  <wsdl:message name="IdentifySoapOut">
+    <wsdl:part name="parameters" element="tns:IdentifyResponse" />
+  </wsdl:message>
+  <wsdl:message name="UpdateCacheSoapIn">
+    <wsdl:part name="parameters" element="tns:UpdateCache" />
+  </wsdl:message>
+  <wsdl:message name="UpdateCacheSoapOut">
+    <wsdl:part name="parameters" element="tns:UpdateCacheResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetCacheStatusSoapIn">
+    <wsdl:part name="parameters" element="tns:GetCacheStatus" />
+  </wsdl:message>
+  <wsdl:message name="GetCacheStatusSoapOut">
+    <wsdl:part name="parameters" element="tns:GetCacheStatusResponse" />
+  </wsdl:message>
+  <wsdl:portType name="BioMatcherServiceSoap">
+    <wsdl:operation name="Initialize">
+      <wsdl:input message="tns:InitializeSoapIn" />
+      <wsdl:output message="tns:InitializeSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Identify">
+      <wsdl:input message="tns:IdentifySoapIn" />
+      <wsdl:output message="tns:IdentifySoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateCache">
+      <wsdl:input message="tns:UpdateCacheSoapIn" />
+      <wsdl:output message="tns:UpdateCacheSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetCacheStatus">
+      <wsdl:input message="tns:GetCacheStatusSoapIn" />
+      <wsdl:output message="tns:GetCacheStatusSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="BioMatcherServiceSoap" type="tns:BioMatcherServiceSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="Initialize">
+      <soap:operation soapAction="http://tempuri.org/Initialize" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Identify">
+      <soap:operation soapAction="http://tempuri.org/Identify" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateCache">
+      <soap:operation soapAction="http://tempuri.org/UpdateCache" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCacheStatus">
+      <soap:operation soapAction="http://tempuri.org/GetCacheStatus" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="BioMatcherServiceSoap12" type="tns:BioMatcherServiceSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="Initialize">
+      <soap12:operation soapAction="http://tempuri.org/Initialize" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Identify">
+      <soap12:operation soapAction="http://tempuri.org/Identify" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateCache">
+      <soap12:operation soapAction="http://tempuri.org/UpdateCache" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCacheStatus">
+      <soap12:operation soapAction="http://tempuri.org/GetCacheStatus" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="BioMatcherService">
+    <wsdl:port name="BioMatcherServiceSoap" binding="tns:BioMatcherServiceSoap">
+      <soap:address location="http://localhost:8000/BioMatcher.asmx" />
+    </wsdl:port>
+    <wsdl:port name="BioMatcherServiceSoap12" binding="tns:BioMatcherServiceSoap12">
+      <soap12:address location="http://localhost:8000/BioMatcher.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

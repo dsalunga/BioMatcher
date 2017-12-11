@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="bae7033f-6bba-425f-9085-6e223dff5a3f" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+  <ClientOptions>
+    <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
+    <GenerateTaskBasedAsynchronousMethod>true</GenerateTaskBasedAsynchronousMethod>
+    <EnableDataBinding>true</EnableDataBinding>
+    <ExcludedTypes />
+    <ImportXmlTypes>false</ImportXmlTypes>
+    <GenerateInternalTypes>false</GenerateInternalTypes>
+    <GenerateMessageContracts>false</GenerateMessageContracts>
+    <NamespaceMappings />
+    <CollectionMappings />
+    <GenerateSerializableTypes>true</GenerateSerializableTypes>
+    <Serializer>Auto</Serializer>
+    <UseSerializerForFaults>true</UseSerializerForFaults>
+    <ReferenceAllAssemblies>true</ReferenceAllAssemblies>
+    <ReferencedAssemblies />
+    <ReferencedDataContractTypes />
+    <ServiceContractMappings />
+  </ClientOptions>
+  <MetadataSources>
+    <MetadataSource Address="http://localhost:8000/BioMatcher.svc" Protocol="http" SourceId="1" />
+  </MetadataSources>
+  <Metadata>
+    <MetadataFile FileName="BioMatcherWcfService.wsdl" MetadataType="Wsdl" ID="7d136184-171f-49d9-a4f3-3e70428c7bc4" SourceId="1" SourceUrl="http://localhost:8000/BioMatcher.svc?wsdl" />
+    <MetadataFile FileName="BioMatcher.xsd" MetadataType="Schema" ID="db9d6636-656d-4450-ad5a-d3425569d9de" SourceId="1" SourceUrl="http://localhost:8000/BioMatcher.svc?xsd=xsd1" />
+    <MetadataFile FileName="BioMatcher1.xsd" MetadataType="Schema" ID="944b180c-1b9d-4b9a-b940-572495afdd0f" SourceId="1" SourceUrl="http://localhost:8000/BioMatcher.svc?xsd=xsd0" />
+    <MetadataFile FileName="BioMatcher2.xsd" MetadataType="Schema" ID="745d9e28-e0c2-4535-bc32-9b64f15bda64" SourceId="1" SourceUrl="http://localhost:8000/BioMatcher.svc?xsd=xsd2" />
+    <MetadataFile FileName="BioMatcher.disco" MetadataType="Disco" ID="1993f144-19c8-41be-a251-5070b345947d" SourceId="1" SourceUrl="http://localhost:8000/BioMatcher.svc?disco" />
+  </Metadata>
+  <Extensions>
+    <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
+    <ExtensionFile FileName="configuration.svcinfo" Name="configuration.svcinfo" />
+  </Extensions>
+</ReferenceGroup>

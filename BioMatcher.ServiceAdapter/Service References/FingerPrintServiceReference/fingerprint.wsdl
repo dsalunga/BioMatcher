@@ -1,0 +1,676 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://tempuri.org/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://tempuri.org/">
+      <s:element name="Insert">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="memberFingerPrint" type="tns:MemberFingerPrint" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="MemberFingerPrint">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:CreationDate">
+            <s:sequence>
+              <s:element minOccurs="1" maxOccurs="1" name="MemberFingerPrintID" type="s:long" />
+              <s:element minOccurs="1" maxOccurs="1" name="MemberID" type="s:long" />
+              <s:element minOccurs="0" maxOccurs="1" name="RawFingerPrint" type="s:base64Binary" />
+              <s:element minOccurs="0" maxOccurs="1" name="FingerPrint" type="s:base64Binary" />
+              <s:element minOccurs="1" maxOccurs="1" name="FingerPrintSize" type="s:int" />
+              <s:element minOccurs="1" maxOccurs="1" name="FingerType" type="s:int" />
+              <s:element minOccurs="1" maxOccurs="1" name="TemplateType" type="s:int" />
+              <s:element minOccurs="1" maxOccurs="1" name="Status" type="s:int" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="CreationDate" abstract="true">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="DateCreated" type="s:dateTime" />
+          <s:element minOccurs="1" maxOccurs="1" name="CreatedBy" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="DateUpdated" type="s:dateTime" />
+          <s:element minOccurs="1" maxOccurs="1" name="UpdatedBy" type="s:int" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="InsertResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="InsertResult" type="s:boolean" />
+            <s:element minOccurs="1" maxOccurs="1" name="memberFingerPrintID" type="s:long" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Update">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="memberFingerPrint" type="tns:MemberFingerPrint" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UpdateResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="UpdateResult" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Deactivate">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="memberFingerPrintID" type="s:long" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="DeactivateResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="DeactivateResult" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UpdateStatus">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="memberFingerPrintID" type="s:long" />
+            <s:element minOccurs="1" maxOccurs="1" name="status" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UpdateStatusResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="UpdateStatusResult" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Delete">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="memberFingerPrintID" type="s:long" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="DeleteResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="DeleteResult" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Get">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="memberFingerPrintID" type="s:long" />
+            <s:element minOccurs="1" maxOccurs="1" name="memberID" type="s:long" />
+            <s:element minOccurs="1" maxOccurs="1" name="localeID" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="fingerType" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="templateType" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="status" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="lastDateUpdated" type="s:dateTime" />
+            <s:element minOccurs="1" maxOccurs="1" name="includeRaw" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetResult" type="tns:ArrayOfMemberFingerPrintRow" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfMemberFingerPrintRow">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="MemberFingerPrintRow" nillable="true" type="tns:MemberFingerPrintRow" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="MemberFingerPrintRow">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:CreationDate">
+            <s:sequence>
+              <s:element minOccurs="1" maxOccurs="1" name="MemberFingerPrintID" type="s:long" />
+              <s:element minOccurs="1" maxOccurs="1" name="MemberID" type="s:long" />
+              <s:element minOccurs="1" maxOccurs="1" name="LocaleID" type="s:int" />
+              <s:element minOccurs="0" maxOccurs="1" name="RawFingerPrint" type="s:base64Binary" />
+              <s:element minOccurs="0" maxOccurs="1" name="FingerPrint" type="s:base64Binary" />
+              <s:element minOccurs="1" maxOccurs="1" name="FingerPrintSize" type="s:int" />
+              <s:element minOccurs="1" maxOccurs="1" name="FingerType" type="s:int" />
+              <s:element minOccurs="1" maxOccurs="1" name="TemplateType" type="s:int" />
+              <s:element minOccurs="1" maxOccurs="1" name="Status" type="s:int" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:element name="GetByLocale">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="localeID" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetByLocaleResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetByLocaleResult" type="tns:ArrayOfMemberFingerPrintRow" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetByMember">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="memberID" type="s:long" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetByMemberResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetByMemberResult" type="tns:ArrayOfMemberFingerPrintRow" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="boolean" type="s:boolean" />
+      <s:element name="ArrayOfMemberFingerPrintRow" nillable="true" type="tns:ArrayOfMemberFingerPrintRow" />
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="InsertSoapIn">
+    <wsdl:part name="parameters" element="tns:Insert" />
+  </wsdl:message>
+  <wsdl:message name="InsertSoapOut">
+    <wsdl:part name="parameters" element="tns:InsertResponse" />
+  </wsdl:message>
+  <wsdl:message name="UpdateSoapIn">
+    <wsdl:part name="parameters" element="tns:Update" />
+  </wsdl:message>
+  <wsdl:message name="UpdateSoapOut">
+    <wsdl:part name="parameters" element="tns:UpdateResponse" />
+  </wsdl:message>
+  <wsdl:message name="DeactivateSoapIn">
+    <wsdl:part name="parameters" element="tns:Deactivate" />
+  </wsdl:message>
+  <wsdl:message name="DeactivateSoapOut">
+    <wsdl:part name="parameters" element="tns:DeactivateResponse" />
+  </wsdl:message>
+  <wsdl:message name="UpdateStatusSoapIn">
+    <wsdl:part name="parameters" element="tns:UpdateStatus" />
+  </wsdl:message>
+  <wsdl:message name="UpdateStatusSoapOut">
+    <wsdl:part name="parameters" element="tns:UpdateStatusResponse" />
+  </wsdl:message>
+  <wsdl:message name="DeleteSoapIn">
+    <wsdl:part name="parameters" element="tns:Delete" />
+  </wsdl:message>
+  <wsdl:message name="DeleteSoapOut">
+    <wsdl:part name="parameters" element="tns:DeleteResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetSoapIn">
+    <wsdl:part name="parameters" element="tns:Get" />
+  </wsdl:message>
+  <wsdl:message name="GetSoapOut">
+    <wsdl:part name="parameters" element="tns:GetResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetByLocaleSoapIn">
+    <wsdl:part name="parameters" element="tns:GetByLocale" />
+  </wsdl:message>
+  <wsdl:message name="GetByLocaleSoapOut">
+    <wsdl:part name="parameters" element="tns:GetByLocaleResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetByMemberSoapIn">
+    <wsdl:part name="parameters" element="tns:GetByMember" />
+  </wsdl:message>
+  <wsdl:message name="GetByMemberSoapOut">
+    <wsdl:part name="parameters" element="tns:GetByMemberResponse" />
+  </wsdl:message>
+  <wsdl:message name="DeactivateHttpGetIn">
+    <wsdl:part name="memberFingerPrintID" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="DeactivateHttpGetOut">
+    <wsdl:part name="Body" element="tns:boolean" />
+  </wsdl:message>
+  <wsdl:message name="UpdateStatusHttpGetIn">
+    <wsdl:part name="memberFingerPrintID" type="s:string" />
+    <wsdl:part name="status" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="UpdateStatusHttpGetOut">
+    <wsdl:part name="Body" element="tns:boolean" />
+  </wsdl:message>
+  <wsdl:message name="DeleteHttpGetIn">
+    <wsdl:part name="memberFingerPrintID" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="DeleteHttpGetOut">
+    <wsdl:part name="Body" element="tns:boolean" />
+  </wsdl:message>
+  <wsdl:message name="GetHttpGetIn">
+    <wsdl:part name="memberFingerPrintID" type="s:string" />
+    <wsdl:part name="memberID" type="s:string" />
+    <wsdl:part name="localeID" type="s:string" />
+    <wsdl:part name="fingerType" type="s:string" />
+    <wsdl:part name="templateType" type="s:string" />
+    <wsdl:part name="status" type="s:string" />
+    <wsdl:part name="lastDateUpdated" type="s:string" />
+    <wsdl:part name="includeRaw" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetHttpGetOut">
+    <wsdl:part name="Body" element="tns:ArrayOfMemberFingerPrintRow" />
+  </wsdl:message>
+  <wsdl:message name="GetByLocaleHttpGetIn">
+    <wsdl:part name="localeID" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetByLocaleHttpGetOut">
+    <wsdl:part name="Body" element="tns:ArrayOfMemberFingerPrintRow" />
+  </wsdl:message>
+  <wsdl:message name="GetByMemberHttpGetIn">
+    <wsdl:part name="memberID" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetByMemberHttpGetOut">
+    <wsdl:part name="Body" element="tns:ArrayOfMemberFingerPrintRow" />
+  </wsdl:message>
+  <wsdl:message name="DeactivateHttpPostIn">
+    <wsdl:part name="memberFingerPrintID" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="DeactivateHttpPostOut">
+    <wsdl:part name="Body" element="tns:boolean" />
+  </wsdl:message>
+  <wsdl:message name="UpdateStatusHttpPostIn">
+    <wsdl:part name="memberFingerPrintID" type="s:string" />
+    <wsdl:part name="status" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="UpdateStatusHttpPostOut">
+    <wsdl:part name="Body" element="tns:boolean" />
+  </wsdl:message>
+  <wsdl:message name="DeleteHttpPostIn">
+    <wsdl:part name="memberFingerPrintID" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="DeleteHttpPostOut">
+    <wsdl:part name="Body" element="tns:boolean" />
+  </wsdl:message>
+  <wsdl:message name="GetHttpPostIn">
+    <wsdl:part name="memberFingerPrintID" type="s:string" />
+    <wsdl:part name="memberID" type="s:string" />
+    <wsdl:part name="localeID" type="s:string" />
+    <wsdl:part name="fingerType" type="s:string" />
+    <wsdl:part name="templateType" type="s:string" />
+    <wsdl:part name="status" type="s:string" />
+    <wsdl:part name="lastDateUpdated" type="s:string" />
+    <wsdl:part name="includeRaw" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetHttpPostOut">
+    <wsdl:part name="Body" element="tns:ArrayOfMemberFingerPrintRow" />
+  </wsdl:message>
+  <wsdl:message name="GetByLocaleHttpPostIn">
+    <wsdl:part name="localeID" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetByLocaleHttpPostOut">
+    <wsdl:part name="Body" element="tns:ArrayOfMemberFingerPrintRow" />
+  </wsdl:message>
+  <wsdl:message name="GetByMemberHttpPostIn">
+    <wsdl:part name="memberID" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetByMemberHttpPostOut">
+    <wsdl:part name="Body" element="tns:ArrayOfMemberFingerPrintRow" />
+  </wsdl:message>
+  <wsdl:portType name="FingerPrintSoap">
+    <wsdl:operation name="Insert">
+      <wsdl:input message="tns:InsertSoapIn" />
+      <wsdl:output message="tns:InsertSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Update">
+      <wsdl:input message="tns:UpdateSoapIn" />
+      <wsdl:output message="tns:UpdateSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Deactivate">
+      <wsdl:input message="tns:DeactivateSoapIn" />
+      <wsdl:output message="tns:DeactivateSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateStatus">
+      <wsdl:input message="tns:UpdateStatusSoapIn" />
+      <wsdl:output message="tns:UpdateStatusSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Delete">
+      <wsdl:input message="tns:DeleteSoapIn" />
+      <wsdl:output message="tns:DeleteSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Get">
+      <wsdl:input message="tns:GetSoapIn" />
+      <wsdl:output message="tns:GetSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetByLocale">
+      <wsdl:input message="tns:GetByLocaleSoapIn" />
+      <wsdl:output message="tns:GetByLocaleSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetByMember">
+      <wsdl:input message="tns:GetByMemberSoapIn" />
+      <wsdl:output message="tns:GetByMemberSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="FingerPrintHttpGet">
+    <wsdl:operation name="Deactivate">
+      <wsdl:input message="tns:DeactivateHttpGetIn" />
+      <wsdl:output message="tns:DeactivateHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateStatus">
+      <wsdl:input message="tns:UpdateStatusHttpGetIn" />
+      <wsdl:output message="tns:UpdateStatusHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Delete">
+      <wsdl:input message="tns:DeleteHttpGetIn" />
+      <wsdl:output message="tns:DeleteHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Get">
+      <wsdl:input message="tns:GetHttpGetIn" />
+      <wsdl:output message="tns:GetHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetByLocale">
+      <wsdl:input message="tns:GetByLocaleHttpGetIn" />
+      <wsdl:output message="tns:GetByLocaleHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetByMember">
+      <wsdl:input message="tns:GetByMemberHttpGetIn" />
+      <wsdl:output message="tns:GetByMemberHttpGetOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="FingerPrintHttpPost">
+    <wsdl:operation name="Deactivate">
+      <wsdl:input message="tns:DeactivateHttpPostIn" />
+      <wsdl:output message="tns:DeactivateHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateStatus">
+      <wsdl:input message="tns:UpdateStatusHttpPostIn" />
+      <wsdl:output message="tns:UpdateStatusHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Delete">
+      <wsdl:input message="tns:DeleteHttpPostIn" />
+      <wsdl:output message="tns:DeleteHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Get">
+      <wsdl:input message="tns:GetHttpPostIn" />
+      <wsdl:output message="tns:GetHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetByLocale">
+      <wsdl:input message="tns:GetByLocaleHttpPostIn" />
+      <wsdl:output message="tns:GetByLocaleHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetByMember">
+      <wsdl:input message="tns:GetByMemberHttpPostIn" />
+      <wsdl:output message="tns:GetByMemberHttpPostOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="FingerPrintSoap" type="tns:FingerPrintSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="Insert">
+      <soap:operation soapAction="http://tempuri.org/Insert" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Update">
+      <soap:operation soapAction="http://tempuri.org/Update" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Deactivate">
+      <soap:operation soapAction="http://tempuri.org/Deactivate" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateStatus">
+      <soap:operation soapAction="http://tempuri.org/UpdateStatus" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Delete">
+      <soap:operation soapAction="http://tempuri.org/Delete" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Get">
+      <soap:operation soapAction="http://tempuri.org/Get" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetByLocale">
+      <soap:operation soapAction="http://tempuri.org/GetByLocale" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetByMember">
+      <soap:operation soapAction="http://tempuri.org/GetByMember" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="FingerPrintSoap12" type="tns:FingerPrintSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="Insert">
+      <soap12:operation soapAction="http://tempuri.org/Insert" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Update">
+      <soap12:operation soapAction="http://tempuri.org/Update" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Deactivate">
+      <soap12:operation soapAction="http://tempuri.org/Deactivate" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateStatus">
+      <soap12:operation soapAction="http://tempuri.org/UpdateStatus" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Delete">
+      <soap12:operation soapAction="http://tempuri.org/Delete" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Get">
+      <soap12:operation soapAction="http://tempuri.org/Get" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetByLocale">
+      <soap12:operation soapAction="http://tempuri.org/GetByLocale" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetByMember">
+      <soap12:operation soapAction="http://tempuri.org/GetByMember" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="FingerPrintHttpGet" type="tns:FingerPrintHttpGet">
+    <http:binding verb="GET" />
+    <wsdl:operation name="Deactivate">
+      <http:operation location="/Deactivate" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateStatus">
+      <http:operation location="/UpdateStatus" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Delete">
+      <http:operation location="/Delete" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Get">
+      <http:operation location="/Get" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetByLocale">
+      <http:operation location="/GetByLocale" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetByMember">
+      <http:operation location="/GetByMember" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="FingerPrintHttpPost" type="tns:FingerPrintHttpPost">
+    <http:binding verb="POST" />
+    <wsdl:operation name="Deactivate">
+      <http:operation location="/Deactivate" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateStatus">
+      <http:operation location="/UpdateStatus" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Delete">
+      <http:operation location="/Delete" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Get">
+      <http:operation location="/Get" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetByLocale">
+      <http:operation location="/GetByLocale" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetByMember">
+      <http:operation location="/GetByMember" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="FingerPrint">
+    <wsdl:port name="FingerPrintSoap" binding="tns:FingerPrintSoap">
+      <soap:address location="https://service.externalservice.org/webservices/fingerprint.asmx" />
+    </wsdl:port>
+    <wsdl:port name="FingerPrintSoap12" binding="tns:FingerPrintSoap12">
+      <soap12:address location="https://service.externalservice.org/webservices/fingerprint.asmx" />
+    </wsdl:port>
+    <wsdl:port name="FingerPrintHttpGet" binding="tns:FingerPrintHttpGet">
+      <http:address location="https://service.externalservice.org/webservices/fingerprint.asmx" />
+    </wsdl:port>
+    <wsdl:port name="FingerPrintHttpPost" binding="tns:FingerPrintHttpPost">
+      <http:address location="https://service.externalservice.org/webservices/fingerprint.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

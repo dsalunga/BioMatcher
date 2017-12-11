@@ -1,0 +1,10 @@
+obj
+
+bin
+
+.vs
+*.suo
+
+*.user
+
+packages
