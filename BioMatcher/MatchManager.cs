@@ -44,7 +44,7 @@ namespace BioMatcher
             {
                 var oldLocaleId = _localeId;
                 _localeId = value;
-                if (_localeId > 0 && _localeId != value && Mode == MatcherModes.ClientLocaleCache)
+                if (_localeId > 0 && oldLocaleId != _localeId && Mode == MatcherModes.ClientLocaleCache)
                     Initialize();
             }
         }

@@ -52,6 +52,7 @@ namespace BioMatcher.OpenAFIS
             _toMatch = new MemberPerson();
             Fingerprint f = new Fingerprint();
             f.AsIsoTemplate = toMatch.Fingerprint;
+            _toMatch.Fingerprints.Add(f);
             //_toMatch.Member = toMatch;
 
             Afis.Threshold = 10;
@@ -61,10 +62,10 @@ namespace BioMatcher.OpenAFIS
             if (match == null)
             {
                 //Console.WriteLine("No matching person found.");
-                return match.Member;
+                return null;
             }
 
-            return null;
+            return match.Member;
         }
 
         private bool _isInitialized;
@@ -115,7 +116,8 @@ namespace BioMatcher.OpenAFIS
 
             set
             {
-                _fingerPrints = value;
+                _fingerPrints = value ?? new List<MemberFingerprint>();
+                _persons = new List<Person>();
                 foreach (var print in _fingerPrints)
                 {
                     try
@@ -125,6 +127,7 @@ namespace BioMatcher.OpenAFIS
                         personPrint.AsIsoTemplate = print.Fingerprint;
                         p.Fingerprints.Add(personPrint);
                         p.Member = print;
+                        _persons.Add(p);
                     }
                     catch { }
                 }

@@ -178,9 +178,35 @@ namespace BioMatcher.Client
             client.Dispose();
         }
 
+        private bool TryGetSampleFingerprint(out MemberFingerprint sample)
+        {
+            sample = null;
+
+            if (MatchManager.Cache == null || MatchManager.Cache.Fingerprints == null)
+                return false;
+
+            List<MemberFingerprint> localeFingerprints;
+            if (!MatchManager.Cache.Fingerprints.TryGetValue(MatchManager.LocaleId, out localeFingerprints))
+                return false;
+
+            if (localeFingerprints == null || localeFingerprints.Count == 0)
+                return false;
+
+            var sampleIndex = localeFingerprints.Count > 1 ? 1 : 0;
+            sample = localeFingerprints[sampleIndex];
+            return true;
+        }
+
         private void cmdSendTasks_Click(object sender, EventArgs e)
         {
-            var request = new MatchRequest(MatchManager.Cache.Fingerprints[MatchManager.LocaleId][1]); //LastFingerprint);
+            MemberFingerprint sample;
+            if (!TryGetSampleFingerprint(out sample))
+            {
+                RichTextBoxConsole.AppendText(Environment.NewLine + "No cached fingerprint sample available for current locale.");
+                return;
+            }
+
+            var request = new MatchRequest(sample); //LastFingerprint);
             request.ExtraRefCode = 123;
             RichTextBoxConsole.AppendText(Environment.NewLine + String.Format("{0}", "Request sent"));
             client.IdentifyAsync(request);
@@ -189,10 +215,19 @@ namespace BioMatcher.Client
         private void cmdSendQueue_Click(object sender, EventArgs e)
         {
             var count = Convert.ToInt32(txtQueue.Text.Trim());
+            if (count <= 0)
+                return;
+
+            MemberFingerprint sample;
+            if (!TryGetSampleFingerprint(out sample))
+            {
+                RichTextBoxConsole.AppendText(Environment.NewLine + "No cached fingerprint sample available for current locale.");
+                return;
+            }
 
             for (int i = 0; i < count; i++)
             {
-                var request = new MatchRequest(MatchManager.Cache.Fingerprints[MatchManager.LocaleId][1]);
+                var request = new MatchRequest(sample);
                 request.ExtraRefCode = 321;
                 queue.Enqueue(request); //.LastFingerprint));
             }

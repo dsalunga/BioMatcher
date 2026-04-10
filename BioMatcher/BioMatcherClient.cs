@@ -63,7 +63,9 @@ namespace BioMatcher
                 MatchManager.Mode = (MatcherModes)DataHelper.GetInt32(key);
             EnableLocaleCache = MatchManager.Mode == MatcherModes.ClientLocaleCache;
 
-            key = ConfigurationManager.AppSettings["BioMatcher.ClietMode"];
+            key = ConfigurationManager.AppSettings["BioMatcher.ClientMode"];
+            if (string.IsNullOrEmpty(key))
+                key = ConfigurationManager.AppSettings["BioMatcher.ClietMode"];
             if (!string.IsNullOrEmpty(key))
                 ClientMode = (ClientModes)DataHelper.GetInt32(key);
         }
